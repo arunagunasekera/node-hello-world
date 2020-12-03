@@ -1,11 +1,9 @@
 pipeline {
-  agent {
-                docker { image 'node:14-alpine' }
-  }
+  agent any
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/sanjeevkumarrao/node-hello-world'
+        git 'https://github.com/arunagunasekera/node-hello-world.git'
       }
     }
     stage('Build') {
@@ -18,5 +16,17 @@ pipeline {
         sh 'npm test'
       }
     }
+    stage('package'){
+        steps{
+            sh 'npm pack'
+        }
+    }
+    stage('deploy'){
+        steps{
+            sh 'npm install Hello-World-0.0.1.tgz'
+        }
+    }
+
   }
 }
+
