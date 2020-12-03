@@ -13,20 +13,23 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'npm test'
+        sh 'npm run test'
       }
     }
     stage('package'){
         steps{
+            sh 'git config --global user.email "the.aruna@gmail.com"'
+            sh 'git config --global user.name "Aruna"'
+            sh "npm version 0.0.$BUILD_NUMBER"
             sh 'npm pack'
+            sh 'cp Hello-World-0.0.$BUILD_NUMBER.tgz /jenkins/artifact-repository'
         }
     }
     stage('deploy'){
         steps{
-            sh 'npm install Hello-World-0.0.1.tgz'
+            sh 'cd /jenkins/deployment && npm install /jenkins/artifact-repository/Hello-World-0.0.$BUILD_NUMBER.tgz'
         }
     }
 
   }
 }
-

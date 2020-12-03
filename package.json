@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node ./src/server.js",
+    "lint": "jshint **/*.js",
     "release": "standard-version",
     "test": "mocha ./tests --recursive"
   },
@@ -13,6 +14,7 @@
   },
   "dependencies": {
     "express": "^4.16.4",
+    "jshint": "^2.12.0",
     "request": "^2.88.0"
   },
   "devDependencies": {
